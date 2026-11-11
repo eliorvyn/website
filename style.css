@@ -1,0 +1,190 @@
+@font-face {
+  font-family: 'Satoshi';
+  src: url('fonts/Satoshi.woff2') format('woff2');
+  font-style: normal;
+  font-weight: 300 900;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Nunito';
+  src: url('fonts/Nunito-ExtraBold.ttf') format('truetype');
+  font-style: normal;
+  font-weight: 800;
+  font-display: swap;
+}
+
+:root {
+  color-scheme: dark;
+  font-family: 'Satoshi', system-ui, sans-serif;
+  color: #eeeefa;
+  background: #0b0b19;
+  font-synthesis: none;
+  --blue: #5c7fe6;
+  --purple: #8e1eb0;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  min-height: 100svh;
+  display: flex;
+  padding: 40px 20px;
+  position: relative;
+  isolation: isolate;
+}
+
+/* Only this decorative layer is fixed; the profile remains in normal flow. */
+/* Animate the opaque background itself, with dark shades of the theme accents. */
+.atmosphere {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  overflow: hidden;
+  pointer-events: none;
+  background: linear-gradient(125deg, #090d1c 0%, #30133f 24%, #19254d 48%, #1b345c 67%, #30133f 85%, #0b1024 100%);
+  background-size: 250% 250%;
+  background-position: 0% 35%;
+  animation: gradient-flow 26s ease-in-out infinite;
+}
+
+.atmosphere::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  opacity: .16;
+  background-image: radial-gradient(circle, #b6b7d8 0.7px, transparent 1px);
+  background-size: 72px 72px;
+  mask-image: radial-gradient(ellipse at center, transparent 20%, #000 100%);
+}
+
+@keyframes gradient-flow {
+  0%, 100% { background-position: 0% 35%; }
+  50% { background-position: 100% 65%; }
+}
+
+.profile-card {
+  width: 100%;
+  max-width: 420px;
+  min-width: 0;
+  margin: auto;
+  padding: 0 0 26px;
+  border: 1px solid #8c86cb30;
+  border-radius: 28px;
+  background: linear-gradient(155deg, #24213766, #11162799), #12131fe6;
+  box-shadow: 0 24px 80px #0005, -18px -12px 65px #8e1eb00a, 18px 12px 65px #5c7fe60d;
+  -webkit-backdrop-filter: blur(20px);
+  backdrop-filter: blur(20px);
+}
+
+/* Clip only the banner, leaving keyboard outlines free to extend from buttons. */
+.profile-banner {
+  display: block;
+  height: 145px;
+  border-radius: 27px 27px 0 0;
+  overflow: hidden;
+  background: #142044;
+}
+.profile-banner img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
+.profile-header { position: relative; padding: 0 28px 24px; text-align: center; }
+nav { margin: 0 28px; }
+
+.profile-picture {
+  display: block;
+  width: 96px;
+  height: 96px;
+  position: relative;
+  margin: -34px auto 12px;
+  object-fit: cover;
+  border: 3px solid #222238;
+  border-radius: 50%;
+  box-shadow: 0 0 0 1px #7971bb66, 0 8px 30px #5c7fe61a;
+}
+
+h1 {
+  margin: 0;
+  font-family: 'Nunito', 'Satoshi', sans-serif;
+  font-size: clamp(32px, 6vw, 36px);
+  font-weight: 800;
+  line-height: 1.2;
+  color: #ab79df;
+  /* Lighter intermediate stops keep the small gradient heading readable. */
+  background: linear-gradient(105deg, var(--purple) -40%, #c17ae2 25%, #8c9cf0 65%, var(--blue) 110%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.username {
+  margin: 6px 0 0;
+  color: #b7b4d8;
+  font-size: 15px;
+  font-weight: 500;
+}
+
+.profile-links {
+  display: grid;
+  gap: 10px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.profile-link {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  min-height: 62px;
+  padding: 12px 16px;
+  border: 1px solid #7777b12e;
+  border-radius: 14px;
+  background: linear-gradient(110deg, #5c7fe609, #8e1eb007), #1a1c2d99;
+  color: #eeeefa;
+  text-decoration: none;
+  transition: border-color .2s ease, background-color .2s ease, box-shadow .2s ease;
+  -webkit-tap-highlight-color: #5c7fe633;
+}
+
+.platform-icon {
+  display: grid;
+  place-items: center;
+  flex: 0 0 24px;
+  color: #b6b9e9;
+}
+.platform-icon svg { display: block; width: 23px; height: 23px; }
+.link-label { font-size: 15px; font-weight: 600; line-height: 1.3; }
+.link-username { display: block; margin-top: 3px; color: #aaaac6; font-size: 12px; font-weight: 400; }
+.link-arrow { margin-left: auto; color: #999ab8; font-size: 19px; }
+
+@media (hover: hover) {
+  .profile-link:hover {
+    border-color: #7e80d17a;
+    background-color: #2a2c46;
+    box-shadow: 0 0 20px #5c7fe612, 0 0 12px #8e1eb00c;
+  }
+}
+
+.profile-link:focus-visible { outline: 3px solid #9baeff; outline-offset: 4px; }
+.profile-link:active { background-color: #30314d; }
+
+@media (max-width: 380px) {
+  body { padding: 24px 14px; }
+  .profile-card { padding-bottom: 22px; border-radius: 24px; }
+  .profile-banner { height: 120px; border-radius: 23px 23px 0 0; }
+  .profile-header { padding-inline: 20px; }
+  nav { margin-inline: 20px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .atmosphere { animation: none; background-position: 50% 50%; }
+  .profile-link { transition: none; }
+}
